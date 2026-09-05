@@ -1,0 +1,17 @@
+name: Build APK
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build with Buildozer
+        uses: ArtemBernatskyy/buildozer-action@v1
+        with:
+          workdir: .
+          buildozer_version: master
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-clock-apk
+          path: bin/*.apk
